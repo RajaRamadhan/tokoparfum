@@ -4,67 +4,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toko Parfum</title>
-    <link rel="icon" href="{{ asset('asset/logo.png') }}" type="image/png"> <!-- Menambahkan favicon -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="icon" href="{{ asset('asset/logo4.png') }}" type="image/png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Font Awesome -->
     <style>
         body {
-            display: flex;
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            min-height: 100vh; 
         }
+
+
         .sidebar {
             width: 250px;
-            background-color: #2c3e50;
-            padding: 20px;
-            color: white;
-            height: 130vh;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-        }
-        .content {
-            flex-grow: 1;
-            padding: 20px;
-            background-color: #ecf0f1;
+            background-color: #111827;
+            color: #9ca3af;
             min-height: 100vh;
+            padding-top: 10px;
+            padding-bottom: 20px;
+            position: fixed;
+            overflow-y: auto; 
         }
+
+        .sidebar h1 {
+            font-size: 20px;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
         .sidebar ul {
-            list-style: none;
+            list-style-type: none;
             padding: 0;
-            margin: 0;
         }
+
         .sidebar ul li {
             margin: 10px 0;
         }
+
         .sidebar ul li a {
-            color: #ecf0f1;
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: #9ca3af;
             text-decoration: none;
-            display: block;
-            padding: 10px;
-            border-radius: 4px;
-            transition: background-color 0.3s, color 0.3s;
+            font-size: 14px;
+            transition: all 0.3s;
         }
+
+        .sidebar ul li a i {
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
         .sidebar ul li a:hover {
-            background-color: #34495e;
+            background-color: #1f2937; 
             color: #ffffff;
         }
-        /* Optional: Add a logo or heading to the sidebar */
-        .sidebar h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            font-weight: bold;
+
+        .sidebar ul li a.active {
+            background-color: #2563eb; 
+            color: #ffffff;
         }
-        .sidebar img {
-            width: 100px; /* Adjust the size as needed */
-            margin-bottom: 20px; /* Space between image and heading */
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            flex-grow: 1;
+            background-color: #f3f4f6; 
+            min-height: 100vh;
+        }
+
+        
+        .sidebar ul li a.active i {
+            color: #ffffff;
+        }
+
+        .sidebar ul li a i {
+            transition: color 0.3s;
+        }
+
+        
+        .profile {
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .profile-info {
+            color: #fff;
+        }
+
+        .profile-info span {
+            display: block;
+        }
+
+        .profile-info .status {
+            color: #10b981; 
         }
     </style>
 </head>
 <body>
+
+    <!-- Sidebar -->
     <div class="sidebar">
-        <h1>Dashboard Toko</h1>
-        @include('layouts.sidebar')
+        <h1>Toko Parfum</h1>
+        
+        <!-- Profile Info Section -->
+        <div class="profile">
+            <img src="{{ asset('asset/logo2.png') }}" alt="Profile Picture">
+            <div class="profile-info">
+                <span>Gold Member</span>
+                <span class="status">Online</span>
+            </div>
+        </div>
+
+        <ul>
+            @include('layouts.sidebar')
+        </ul>
     </div>
+
     <div class="content">
         @yield('content')
     </div>
+
 </body>
 </html>

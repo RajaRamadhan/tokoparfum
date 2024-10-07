@@ -23,14 +23,22 @@ class PostController extends Controller
      *
      * @return View
      */
-    public function index(): View
-    {
-        //get posts
-        $posts = Post::latest()->paginate(5);
+    public function index(Request $request): View
+{
+    // Mengambil input pencarian dari form
+    $search = $request->input('search');
+    
+    // Mengambil posts dengan filter pencarian berdasarkan judul atau keterangan
+    $posts = Post::when($search, function($query, $search) {
+        return $query->where('title', 'like', "%{$search}%")
+                     ->orWhere('content', 'like', "%{$search}%");
+    })->latest()->get();
+    
+    // Render view dengan data posts yang telah difilter
+    return view('posts.index', compact('posts'));
+}
 
-        //render view with posts
-        return view('posts.index', compact('posts'));
-    }
+    
 
     /**
      * create
@@ -171,4 +179,6 @@ class PostController extends Controller
         //redirect to index
         return redirect()->route('posts.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
+
+        
 }

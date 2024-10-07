@@ -101,12 +101,27 @@
 <body>
 
     <div class="container fade-in">
-        <h1 class="header-title">Manajemen Data Kasir</h1>
+        <h1 class="header-title">Manajemen Data Barang</h1>
 
         <div class="card border-0">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h5 class="card-title">Daftar Data Kasir</h5>
+                    <h5 class="card-title">Daftar Data Barang</h5>
+
+                        <form action="{{ route('posts.index') }}" method="GET" class="d-flex justify-content-end" style="max-width: 400px; margin-right: 10px;" id="search-form">
+                             <input type="text" id="search-input" name="search" class="form-control me-2" placeholder="Cari Data..." value="{{ request('search') }}" style="max-width: 200px; padding: 8px;">
+                                 <button type="submit" class="btn btn-custom" style="padding: 3px 10px;">
+                                   <i class="fas fa-search"></i> Cari
+                                 </button>
+                            </form>
+                         <script>
+                              document.getElementById('search-form').addEventListener('submit', function() {      
+                                 });
+                                 window.onload = function() {
+                                     document.getElementById('search-input').value = '';
+                                };
+                        </script>
+
                     <a href="{{ route('posts.create') }}" class="btn btn-custom">
                         <i class="fas fa-plus"></i> Tambah Data
                     </a>
@@ -152,9 +167,6 @@
                         @endforelse
                     </tbody>
                 </table>
-                <div class="d-flex justify-content-center">
-                    {{ $posts->links() }}
-                </div>
             </div>
         </div>
 
